@@ -22,7 +22,6 @@ def generateZi(data):
             if z_k > 0:
                 r = k + z_k - 1
                 l = k
-                print(k)
                 z_i[k] = z_k
             else:
                 z_i[k] = 0
@@ -54,7 +53,6 @@ def compare(data, i, j):
     """
 
     l = len(data)
-    print(l)
     count = 0
 
     while j < l:  # until we reach the end of the string
