@@ -22,6 +22,9 @@ class Fasta:
             else:
                 self.data[index] = line
 
+    def getData(self):
+        return self.data
+
 
 if __name__ == '__main__':
     main()
