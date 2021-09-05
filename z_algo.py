@@ -11,7 +11,6 @@ def main():
 
 
 def generateZi(data):
-    print("started")
     l = 0
     r = 0
     z_i = np.zeros((len(data),), dtype=np.int)
