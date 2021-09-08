@@ -26,6 +26,12 @@ def prob2():
     print("input: " + "aaaaaaaaa" + " pattern: " + "aa")
     print("matching indices in the input string: " + str(z.getMatches()))
 
+    input = "gtttacacggcagcctttctttatgaatatctggttgcctttgctcaagttaatccacatcagaccactacccctgagtctagcccggatcaaggctgcc"
+    pattern = "ttgc"
+    z = ExactMatch(input, pattern, "$")
+    print("input: " + str(input) + " pattern: " + str(pattern))
+    print("matching indices in the input string: " + str(z.getMatches()))
+
     input = "cgactgcctatacatgacaagtcgtcttccgtcctatcttgtatcgcagtggggcgctcagggtattacaatgccgccatctaccctctcgcccttgccgggcaacatgagaggggcaaagcaggtccccgtaaggccagcgaccctttgagttacaagctatcactgtcggatggggtcactatggtaatacaggtacttgaaactagtgacggatcccactacgccttcgcgcttcagcgcggactggtgggaggtcaggcagcgcatgtttcatgtcctcagaacagttcattcactgagaggacaatcactctaagctggatcaggaatgcgaacccaaggcctcaatgtagctcggggcgcgtcgtaagagaggaggcaaacattaatacgcgggtagatgcgggacttgtgatgcgcacatttttgtatatgtgtttaaaatagttttgtggagaagacatgacattggtgtgttccgatgaacgcgcatggcaggatcaagcatatggaacgatggggccaagtgcaatcagaaagtctacggggtgtgtccatttttatttcggtcgtgtgtcttacataccgaaaggttcccattgatattcggagcgcccaatctgtacgttcaaacggtatcggtttgaccggaccaagacaagtaaaccttttgttagagcagagaaggcttactgagtaacgacaggccggcctcttcagcacgggtagaggtggactgaagggcgcacaactggccgtaagatgattacaaattactggttttacgcgaatacgctttttacgttggcctacagtaagtaacagacttaccgcgcaggcaactttacatttaaactgcaatactccggaacgctagtaggctcgggagcccggacaattttaacgccctaactgggacttcctgtaagcgggatctgtgttcacatggggcctgtgcacctgtttcgcccaagaatacgcatggcgtgttttacct"
     pattern = "gcctc"
     z = ExactMatch(input, pattern, "$")
