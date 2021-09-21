@@ -20,7 +20,7 @@ class Fasta:
             if line.startswith(">"):
                 index = int(line.split("seq")[-1])
             else:
-                self.data[index] = line
+                self.data[index] = line.rstrip()
 
     def getData(self):
         return self.data
