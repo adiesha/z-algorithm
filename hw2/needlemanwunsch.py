@@ -8,10 +8,8 @@ class NeedlemanWunsch:
         self.delta = delta
         self.n = len(s)
         self.m = len(t)
-        self.V = np.full(shape=(self.n + 1, self.m + 1), fill_value=None, dtype=object)
-        for i in range(self.n + 1):
-            for j in range(self.m + 1):
-                self.V[i, j] = Cell()
+        self.V = np.full(shape=(self.n + 1, self.m + 1), fill_value=0)
+
 
     def calc(self):
         # Filling base conditions
@@ -30,11 +28,7 @@ class NeedlemanWunsch:
     def getOptScore(self):
         return self.V[-1, -1]
 
-    def print(self):
-        for i in range(self.n + 1):
-            for j in range(self.m + 1):
-                print(self.V[i, j].val, end=' ')
-            print("\n")
+
 
 
 class Cell:
@@ -55,13 +49,13 @@ class Cell:
 def main():
     print("Running Needleman-Wunsch Algorithm")
     nw = NeedlemanWunsch("adsdf", "sdjfhsdf", lambda x, y: 2)
-    nw.print()
+    print(nw.V)
     print(nw.delta(3, 6))
 
     nw2 = NeedlemanWunsch("ACAATCC", "AGCATGC")
-    nw2.print()
+    print(nw2.V)
     print(nw2.delta(1, 2))
-    nw2.V[3, 2].setVal(8)
+    nw2.V[3, 2] = 8
     nw2.calc()
     print(nw2.V)
 
