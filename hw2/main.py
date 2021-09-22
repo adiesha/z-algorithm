@@ -1,22 +1,30 @@
+import sys
+
 from needlemanwunsch import NeedlemanWunsch
 from readFasta import Fasta
 
 
 def main():
-    fasta1 = Fasta("global1.fasta")
-    data = fasta1.getData()
-    print(data)
-    nw = NeedlemanWunsch(data.get(1), data.get(2))
-    nw.calc()
-    print(nw.getOptScore())
+    print('Number of arguments:', len(sys.argv), 'arguments.')
+    print('Argument List:', str(sys.argv))
+    print(colors.BLUE + "Testing for Q3 with Bonus point modification" + colors.ENDC)
+    print(colors.GREEN + "Reading fasta files" + colors.ENDC)
 
-    fasta2 = Fasta("global2.fasta")
-    data = fasta2.getData()
-    print(data)
-    nw = NeedlemanWunsch(data.get(1), data.get(2))
-    nw.calc()
-    print(nw.V)
-    print(nw.getOptScore())
+    for i in range(1, len(sys.argv)):
+        fastaName = sys.argv[i]
+        print(fastaName)
+        fasta = Fasta(fastaName)
+        data = fasta.getData()
+        print("Data in the file: ", fastaName)
+        print(data)
+        nw = NeedlemanWunsch(data.get(1), data.get(2))
+        nw.calc()
+        print(colors.BLUE + "Printing Dynamic Programming Table" + colors.ENDC)
+        print(colors.GREEN + str(nw.V) + colors.ENDC)
+        print(colors.BLUE + "Optimal Alignment score: " + colors.ENDC, str(nw.getOptScore()))
+        print("Number of Optimal Alignments: ", nw.getNoOfOPTAlignments())
+        print("Optimal Alignments ->")
+        nw.getAllAlginments()
 
 
 class colors:  # You may need to change color settings
