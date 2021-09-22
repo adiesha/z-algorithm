@@ -12,6 +12,7 @@ class NeedlemanWunsch:
         self.V = np.full(shape=(self.n + 1, self.m + 1), fill_value=0)
         self.G = nx.DiGraph()
         self.G.add_nodes_from(range((self.m + 1) * (self.n + 1)))
+        self.noOfOPTAlignments = 0
 
     def calc(self):
         # Filling base conditions
@@ -40,6 +41,12 @@ class NeedlemanWunsch:
                 if left == maxValue:
                     self.G.add_edge(self.getNodeIDfromIndex(i, j), self.getLeftNodeId(i, j))
 
+        target = 0
+        source = self.getNodeIDfromIndex(self.n, self.m)
+        paths = nx.all_simple_paths(self.G, source, target)
+        for path in paths:
+            self.noOfOPTAlignments += 1
+
     def getOptScore(self):
         return self.V[-1, -1]
 
@@ -57,6 +64,66 @@ class NeedlemanWunsch:
     def getDiagNodeId(self, i, j):
         return self.getNodeIDfromIndex(i - 1, j - 1)
 
+    def getAllAlginments(self):
+        target = 0
+        source = self.getNodeIDfromIndex(self.n, self.m)
+        paths = nx.all_simple_paths(self.G, source, target)
+        s = self.s
+        t = self.t
+
+        index = 1
+        for path in paths:
+            sStack = []
+            tStack = []
+            print("Optimal Alignment: ", str(index))
+            for i in range(0, len(path) - 1):
+                currentN = path[i]
+                nextN = path[i + 1]
+
+                ini = currentN // (self.m + 1)
+                inj = currentN % (self.m + 1)
+
+                # print(ini, inj)
+
+                if self.isLeftNode(currentN, nextN):
+                    # print(str(currentN) + " " + str(nextN) + " Left")
+                    sStack.append(colors.RED + "_" + colors.ENDC)
+                    tStack.append(colors.RED + self.t[inj - 1] + colors.ENDC)
+
+                if self.isUpNode(currentN, nextN):
+                    # print(str(currentN) + " " + str(nextN) + " Up")
+                    sStack.append(colors.YELLOW + self.s[ini - 1] + colors.ENDC)
+                    tStack.append(colors.YELLOW + "_" + colors.ENDC)
+
+                if self.isDiagNode(currentN, nextN):
+                    # print(str(currentN) + " " + str(nextN) + " Diag")
+                    startColor = colors.GREEN if self.s[ini - 1] == self.t[inj - 1] else colors.BLUE
+                    endColor = colors.ENDC
+                    sStack.append(startColor + self.s[ini - 1] + endColor)
+                    tStack.append(startColor + self.t[inj - 1] + endColor)
+
+            # print("+++")
+            while sStack:
+                print(sStack.pop(), end=' ')
+            print("\n")
+            while tStack:
+                print(tStack.pop(), end=' ')
+            print("\n")
+            index += 1
+
+    def isLeftNode(self, id1, id2):
+        return id1 - 1 == id2
+
+    def isDiagNode(self, id1, id2):
+        m = self.m
+        return id1 - (m + 1) - 1 == id2
+
+    def isUpNode(self, id1, id2):
+        m = self.m
+        return id1 - (m + 1) == id2
+
+    def getNoOfOPTAlignments(self):
+        return self.noOfOPTAlignments
 
 
 class Cell:
@@ -72,6 +139,14 @@ class Cell:
 
     def print(self):
         print(self.val)
+
+
+class colors:  # You may need to change color settings
+    RED = '\033[31m'
+    ENDC = '\033[m'
+    GREEN = '\033[32m'
+    YELLOW = '\033[33m'
+    BLUE = '\033[34m'
 
 
 def main():
@@ -90,12 +165,10 @@ def main():
     print(list(nw2.G.nodes))
     print(list(nw2.G.edges))
 
-    # print(nw2.getNodeIDfromIndex(7, 7))
-    # print(nw2.getNodeIDfromIndex(7, 0))
-    # print(nw2.getNodeIDfromIndex(0, 7))
-    # print(nw2.getNodeIDfromIndex(0, 8))
     for path in nx.all_simple_paths(nw2.G, 63, 0):
         print(path)
+
+    nw2.getAllAlginments()
 
 
 if __name__ == '__main__':
