@@ -32,7 +32,6 @@ class SA():
 
     def getBW(self):
         return [self.s[self.sa[i] - 1] if self.sa[i] != 0 else self.s[-1] for i in range(len(self.sa))]
-        pass
 
     def alphabet(self):
         return sorted(list(set(self.s)))
@@ -71,6 +70,37 @@ class SA():
                 else:
                     occds[a][i] = prev
         return occds
+
+    def printoccds(self):
+        for k, v in self.occds.items():
+            print(k + " : " + str(v))
+
+    def binarysearchsa(self, pattern):
+        l = 0
+        r = len(self.sa) - 1
+        while (l <= r):
+            m = int((l + r) / 2)
+            prefix = self.findprefix(self.s[self.sa[m]:], pattern)
+            if len(prefix) == len(pattern):
+                return True, self.s[self.sa[m]:]
+            elif self.s[self.sa[m]] > pattern:
+                r = m - 1
+            else:
+                l = m + 1
+        if l > r:
+            return False, None
+
+    def findprefix(self, s, pattern):
+        l = min(len(s), len(pattern))
+        count = 0
+        for i in range(l):
+            if pattern[i] == s[i]:
+                count = count + 1
+            else:
+                break
+        return pattern[0:count]
+
+
 
 
 if __name__ == '__main__':
