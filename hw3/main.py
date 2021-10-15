@@ -15,28 +15,6 @@ def main():
         print(colors.BLUE + "String:-> " + colors.ENDC + colors.GREEN + s + colors.ENDC)
         print(colors.RED + str(sa.sa) + colors.ENDC)
 
-    # s1 = "banana$"
-    # s2 = "missisipi$"
-    # s3 = "abracadabra$"
-    # s4 = "gacgaacgac$"
-    #
-    # print("Note that arrays starts from 0")
-    # sa1 = SA(s1)
-    # print("String:-> " + s1)
-    # print(sa1.sa)
-    #
-    # sa2 = SA(s2)
-    # print("String:-> " + s2)
-    # print(sa2.sa)
-    #
-    # sa3 = SA(s3)
-    # print("String:-> " + s3)
-    # print(sa3.sa)
-    #
-    # sa4 = SA(s4)
-    # print("String:-> " + s4)
-    # print(sa4.sa)
-
     sg = "gacgaacgac$"
     sgsa = SA(sg)
     print(colors.BLUE + "FM-index for string:-> " + colors.ENDC + colors.GREEN + sg + colors.ENDC)
