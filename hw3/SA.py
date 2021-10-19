@@ -71,6 +71,12 @@ class SA():
                     occds[a][i] = prev
         return occds
 
+    def getOccds(self, x, i):
+        if i < 0:
+            return 0
+        else:
+            return self.occds[x][i]
+
     def printoccds(self):
         for k, v in self.occds.items():
             print(k + " : " + str(v))
@@ -100,7 +106,19 @@ class SA():
                 break
         return pattern[0:count]
 
-
+    def backwardsearch(self, pattern):
+        st = 0
+        ed = len(self.s) - 1
+        i = len(pattern) - 1
+        while st <= ed and i >= 0:
+            x = pattern[i]
+            st = self.C[x] + self.getOccds(x, st - 1)
+            ed = self.C[x] + self.getOccds(x, ed) - 1
+            i -= 1
+        if st <= ed:
+            return True, (st, ed)
+        else:
+            return False, None
 
 
 if __name__ == '__main__':
