@@ -1,5 +1,5 @@
 def main():
-    fasta = Fasta("test.fasta")
+    fasta = Fasta("../test.fasta")
     print(fasta.data)
 
 

@@ -1,5 +1,5 @@
 from match import ExactMatch
-from readFasta import Fasta
+from utlis.readFasta import Fasta
 
 
 def main():

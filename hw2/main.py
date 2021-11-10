@@ -1,7 +1,7 @@
 import sys
 
 from needlemanwunsch import NeedlemanWunsch
-from readFasta import Fasta
+from utlis.readFasta import Fasta
 
 
 def main():
